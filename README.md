@@ -11,25 +11,15 @@ In this project, we explore the different ways a product can be evaluated agains
 # Research questions
 
 - What interesting insights do we get by looking at the distribution of the nutritional rating inside each product category?
-
   - Can we find a relevant level of granularity when speaking of product categories?
-
   - In terms of nutritional rating, how similar are products inside a category to each other? How much do they differ from products in other categories?
-
   - Are there products that diverge far from other products in their category? Do these products actually exist ("food extremists") or are they errors in the data?
-
 - Can we produce a nutritional rating for each product in terms of the nutritional rating of its category?
-
   - How does the new rating change our view of the data?
-
   - Can we group the products based on the new score? What properties do the resulting groups share?
-
 - How does the picture change when we attempt to cluster products directly based on their nutrition facts?
-
   - What do these groups resemble? (e.g. whole-grain products? protein-heavy products?)
-
   - Are there any unexpected clusters?
-
   - What can we tell from the distribution of the nutritional rating inside each cluster?
 
 # Dataset
@@ -56,11 +46,8 @@ We might use other (complementary) datasets in the future, but none has been ide
 
 - Take a deeper look at the dataset:
   - Identify interesting columns and clean inconsistencies.
-
   - Confirm or redefine our initial research questions based on the exploration, and assess the need for complementary datasets.
-
   - Keep track of interesting facts for the final data story.
-
 - Learn more about nutrition to better understand the issue at hand.
 - Start analyzing the dataset in order to get some preliminary answers to our questions.
 - Develop a provisional skeleton for the data story.
