@@ -4,13 +4,13 @@ import pandas as pd
 import numpy as np
 
 
-def plot_decription(info: Dict[str, str]) -> None:
+def plot_settings(info: Dict[str, str]) -> None:
     """
-        Helper funciton to add label/title to plots.
+        Helper function to set several plot parameters simply
         Title, xlabel and ylabel are supported.
 
         eg:
-        plot_decription({'title': "My title"})
+        plot_settings({'title': "My title"})
     """
     if 'title' in info.keys():
         plt.title(info['title'])
@@ -21,7 +21,7 @@ def plot_decription(info: Dict[str, str]) -> None:
     if 'xscale' in info.keys():
         plt.xscale(info['xscale'])
     if 'yscale' in info.keys():
-        plt.xscale(info['yscale'])
+        plt.yscale(info['yscale'])
 
 
 def log_bins(serie: pd.Series, nb_of_bins: int) -> np.ndarray:
