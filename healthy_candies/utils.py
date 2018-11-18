@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 from typing import Dict
+import pandas as pd
+import numpy as np
 
 
 def plot_decription(info: Dict[str, str]) -> None:
@@ -16,3 +18,18 @@ def plot_decription(info: Dict[str, str]) -> None:
         plt.xlabel(info['xlabel'])
     if 'ylabel' in info.keys():
         plt.ylabel(info['ylabel'])
+
+
+def log_bins(serie: pd.Series, nb_of_bins: int) -> np.ndarray:
+    """
+      This function generates a logarithmic series between
+      min(serie) and max(serie),
+      with nb_of_bins intervals
+    """
+    begin = min(serie)
+    end = max(serie)
+    bins = np.logspace(np.log10(begin), np.log10(end), nb_of_bins+1)
+    # Make sure there are no numerical errors on the beginning and end
+    bins[0] = begin
+    bins[-1] = end
+    return bins
