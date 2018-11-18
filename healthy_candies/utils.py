@@ -18,6 +18,10 @@ def plot_decription(info: Dict[str, str]) -> None:
         plt.xlabel(info['xlabel'])
     if 'ylabel' in info.keys():
         plt.ylabel(info['ylabel'])
+    if 'xscale' in info.keys():
+        plt.xscale(info['xscale'])
+    if 'yscale' in info.keys():
+        plt.xscale(info['yscale'])
 
 
 def log_bins(serie: pd.Series, nb_of_bins: int) -> np.ndarray:
