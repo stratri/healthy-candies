@@ -5,4 +5,4 @@ Healthy Candies
 
 # Set-up
 
-Run `bash ./init.sh` to download the data from *OpenFoodFacts*.
+Run `python ./init.py` to setup all the required data for the project to run correctly.
