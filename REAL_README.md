@@ -5,4 +5,4 @@ Healthy Candies
 
 # Set-up
 
-Run `python ./init.py` to setup all the required data for the project to run correctly.
+Run `python ./init_project.py` to setup all the required data for the project to run correctly.

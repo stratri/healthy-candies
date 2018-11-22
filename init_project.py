@@ -1,8 +1,9 @@
-from healthy_candies.path import DATA_FOLDER, MAIN_DATASET_FILE, WIKIDATA_CAT_TREE_CSV
+from healthy_candies.path import DATA_FOLDER, MAIN_DATASET_FILE, WIKIDATA_CAT_TREE_CSV, OFF_CAT_CSV
 from os.path import exists, join
 import os
 from subprocess import call
 from healthy_candies.init_scipts.cat_hierarchy import compute_and_store_cat_hierarchy
+from healthy_candies.init_scipts.cat_off import compute_and_store_off_cat
 
 # Setting up the data folder
 if not exists(join(DATA_FOLDER)):
@@ -20,12 +21,19 @@ else:
     print("Found open food facts dataset")
 
 
-# Compute the hierarchy file
+# Compute the hierarchy csv
 if not exists(WIKIDATA_CAT_TREE_CSV):
     print("Computing the category tree from wikidata")
     compute_and_store_cat_hierarchy()
 else:
     print("Existing category tree found")
+
+# Compute the off categories csv
+if not exists(OFF_CAT_CSV):
+    print("Computing the categories CSV from Open Food Facts")
+    compute_and_store_off_cat()
+else:
+    print("Existing category CSV from Open Food Facts found")
 
 # DONE
 print("All systems are ready")

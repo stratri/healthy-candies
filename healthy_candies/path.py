@@ -11,3 +11,4 @@ CATEGORIES_OFF_FILE = path.join(STATIC_DATA_FOLDER, 'categoriesOFF.json')
 CATEGORIES_TREE_WIKIDATA_FILE = path.join(
     STATIC_DATA_FOLDER, 'categoriesTreeWikiData.json')
 WIKIDATA_CAT_TREE_CSV = path.join(DATA_FOLDER, "wikidata_cat_tree.csv")
+OFF_CAT_CSV = path.join(DATA_FOLDER, "off_cat.csv")
