@@ -44,3 +44,45 @@ def load_data(usecols: List[str] = None, limit_have_nutri_score: bool = False) -
         df = df[usecols]
 
     return df
+
+
+def load_clean_rel_to_nutri(usecols: List[str] = None,
+                            filter_has_image: bool = False,
+                            nutri_cols: List[str] = None) -> pd.DataFrame:
+    """
+        Load the full CSV from openfoodfacts, performs some cleaning
+        and returns it.
+        Inspired by the notebook: clean_data_relative_to_nutrifacts.ipynb
+
+        Parameters
+        ----------
+        usecols: List[str], default None
+            Columns to return. If None, returns all columns
+        filter_has_image: bool, default False
+            Should we keep only rows where image_small_url is non nan ?
+            The cleaning is relative to the state of the dataframe afterwards
+        nutri_cols: List[str], default NUTRI_COLS
+            List of the columns to consider in the cleaning process
+    """
+    if nutri_cols is None:
+        nutri_cols = NUTRI_COLS
+
+    df = load_data()
+
+    if filter_has_image:
+        urls = df.image_small_url.fillna('')
+        df = df[urls != '']
+
+    df = df[~df[nutri_cols].isna().any(axis=1)]
+    q = df[nutri_cols].quantile([0.025, 0.975])
+
+    # remove crazy values
+    for col in q.columns:
+        if "nutrition-score" not in col:
+            df = df[(df[col] >= q.loc[0.025, col]) & (
+                df[col] <= q.loc[0.975, col])]
+
+    if usecols is not None:
+        df = df[usecols]
+
+    return df
