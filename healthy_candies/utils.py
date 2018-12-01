@@ -1,7 +1,10 @@
-import matplotlib.pyplot as plt
 from typing import Dict
-import pandas as pd
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from matplotlib import colors
 import numpy as np
+import pandas as pd
 
 
 def plot_settings(info: Dict[str, str]) -> None:
@@ -37,3 +40,29 @@ def log_bins(serie: pd.Series, nb_of_bins: int) -> np.ndarray:
     bins[0] = begin
     bins[-1] = end
     return bins
+
+
+# taken from http://gvallver.perso.univ-pau.fr/?p=712
+def show_colors(colors):
+    """
+    Draw a square for each color contained in the colors list
+    given in argument.
+
+    `colors`: array of tuple of RGB values
+    """
+    with plt.rc_context(plt.rcParamsDefault):
+        fig = plt.figure(figsize=(6, 1), frameon=False)
+        ax = fig.add_subplot(111)
+        for x, color in enumerate(colors):
+            ax.add_patch(
+                mpl.patches.Rectangle(
+                    (x, 0), 1, 1, facecolor=color
+                )
+            )
+        ax.set_xlim((0, len(colors)))
+        ax.set_ylim((0, 1))
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_aspect("equal")
+
+    return fig
