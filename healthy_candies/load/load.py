@@ -5,6 +5,20 @@ from .schema import SCHEMA
 from healthy_candies.path import DATA_FOLDER
 from typing import List
 
+# Constant that holds the most important nutri_facts columns
+# i.e.: columns with the most data points
+NUTRI_COLS = [
+    "energy_100g",
+    "fat_100g",
+    "saturated-fat_100g",
+    "carbohydrates_100g",
+    "sugars_100g",
+    "proteins_100g",
+    "salt_100g",
+    "sodium_100g",
+    "nutrition-score-fr_100g"
+]
+
 
 def load_data(usecols: List[str] = None, limit_have_nutri_score: bool = False) -> pd.DataFrame:
     """

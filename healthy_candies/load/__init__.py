@@ -1,1 +1,1 @@
-from .load import load_data
+from .load import load_data, NUTRI_COLS
