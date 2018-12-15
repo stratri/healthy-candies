@@ -1,3 +1,9 @@
+"""
+This script is used to extract the hue information contained
+in the products images.
+"""
+
+
 import pandas as pd
 import numpy as np
 from PIL import Image
@@ -11,6 +17,10 @@ from os import listdir
 IMAGES_FOLDER = join(DATA_FOLDER, 'images')
 TMP_OUTPUT = join(DATA_FOLDER, 'colors.json')
 
+# Constants related to the script
+V_THRESHOLD = 0.5
+S_THRESHOLD = 0.6
+
 N_HUES = 12
 HUES_STR = ['red', 'orange', 'yellow', 'yellow-green', 'green', 'green-cyan',
             'cyan', 'cyan-blue', 'blue', 'blue-magenta', 'magenta', 'pink']
@@ -22,11 +32,19 @@ HUE_BINS = [(a + b) / 2 for a, b in zip([0] + REF_HUES, REF_HUES + [1])]
 HUE_BINS[-1] = np.nextafter(HUE_BINS[-1], +np.inf)
 
 
-def extract_arr(arr, i):
+def extract_arr(arr: np.ndarray, i: int) -> np.ndarray:
+    """
+        Function to extract a dimenson of 3d array.
+    """
     return arr[:, :, i].flatten()
 
 
-def get_hue_features(img_fp):
+def get_hue_features(img_fp: str) -> dict:
+    """
+    Function to extract the hue information from an image
+    given its file path `img_fp`.
+    """
+
     img = Image.open(img_fp)
     # Some images have more than 3 layers, we only want the RGB ones
     arr = np.array(img)[:, :, :3]
@@ -38,7 +56,7 @@ def get_hue_features(img_fp):
     V = extract_arr(hsv, 2)
 
     # We keep only the values that are not too dark
-    mask = (V > 0.5) & (S > 0.6)
+    mask = (V > V_THRESHOLD) & (S > S_THRESHOLD)
     HH = H[mask]
     SS = S[mask]
     VV = V[mask]
@@ -63,6 +81,10 @@ def get_hue_features(img_fp):
 
 
 def get_colors_from_tmp() -> pd.DataFrame:
+    """
+    load a JSON file corresponding to the temporary color extraction.
+    """
+
     with open(TMP_OUTPUT) as f:
         res = []
         for l in f.readlines():
