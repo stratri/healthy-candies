@@ -28,3 +28,8 @@ This file contains the hues extracted from the images of the products.
 
 To get it, you first need to run the `scrap_images.py` script to get all the images for all products.
 Then you should run the `extract_colors.py` script (takes a lot of time).
+
+
+## File: `clusters.csv.zip`
+
+This file contains the resulting mapping from products to cluster using DBSCAN.
